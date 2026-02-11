@@ -25,16 +25,16 @@ jobs:
         pip install pyinstaller
 
     - name: Build Tkinter EXE
+      shell: powershell
       run: |
-        # 아이콘이 있으면 적용, 없으면 그냥 빌드
-        if exist app.ico (
-          pyinstaller --onefile --noconsole --icon=app.ico main.py
-        ) else (
-          pyinstaller --onefile --noconsole main.py
-        )
+        if (Test-Path "app.ico") {
+            pyinstaller --onefile --noconsole --icon=app.ico main.py
+        } else {
+            pyinstaller --onefile --noconsole main.py
+        }
 
     - name: Upload EXE artifact
-      uses: actions/upload-artifact@v4  # <-- 여기만 v4로 변경
+      uses: actions/upload-artifact@v4
       with:
         name: main-exe
         path: dist/main.exe
