@@ -34,7 +34,7 @@ jobs:
         )
 
     - name: Upload EXE artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4  # <-- 여기만 v4로 변경
       with:
         name: main-exe
         path: dist/main.exe
